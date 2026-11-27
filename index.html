@@ -37,8 +37,11 @@ h1{font-family:var(--display);font-weight:800;font-size:clamp(26px,5vw,38px);mar
 .seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px}
 .seg button{border:0;background:transparent;color:var(--muted);font:inherit;font-weight:700;padding:7px 16px;border-radius:999px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
-.weeklabel{font-weight:700;font-variant-numeric:tabular-nums}
-.weeklabel small{color:var(--muted);font-weight:500;margin-left:6px}
+.nav{display:inline-flex;align-items:center;gap:8px}
+.nav button{border:1px solid var(--line);background:var(--surface);color:var(--ink);width:40px;height:40px;border-radius:50%;font-size:20px;line-height:1;cursor:pointer}
+.nav button:disabled{opacity:.3;cursor:default}
+.weeklabel{font-weight:700;font-variant-numeric:tabular-nums;text-align:center;min-width:118px;line-height:1.2}
+.weeklabel small{display:block;color:var(--muted);font-weight:500;font-size:13px}
 button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;overflow:hidden}
 .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:14px 0 0;color:var(--muted);font-size:13px}
@@ -48,6 +51,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline
 .scroll{overflow-x:auto}
 table{border-collapse:separate;border-spacing:0 6px;width:100%;min-width:720px}
 th{font-weight:700;font-size:13px;color:var(--muted);padding:4px 4px 8px;text-align:center}
+th.today{color:var(--accent)}
 th small{display:block;font-weight:500;font-variant-numeric:tabular-nums}
 td{padding:0 3px;vertical-align:middle}
 td.who{width:130px;font-weight:700;white-space:nowrap}
@@ -57,25 +61,26 @@ td.who{width:130px;font-weight:700;white-space:nowrap}
 .cell.wait{background:transparent;border:1px dashed var(--line);color:var(--muted);font-weight:500;cursor:default;padding:15px 4px}
 tr.count td{padding-top:6px;text-align:center;color:var(--muted);font-size:13px;font-weight:700}
 tr.count td.who{text-align:left;font-weight:500}
-.chip{display:inline-block;margin-left:6px;font-size:11px;font-weight:500;color:var(--muted);border:1px dashed var(--line);border-radius:999px;padding:1px 7px;vertical-align:middle}
 
 /* Jour */
-.days{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px}
-.days button{flex:1 0 auto;min-width:56px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:6px 8px;font:inherit;cursor:pointer;text-align:center}
-.days button small{display:block;color:var(--muted);font-variant-numeric:tabular-nums}
+.days{display:flex;gap:5px;margin-bottom:12px}
+.days button{flex:1 1 0;min-width:0;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:6px 2px;font:inherit;cursor:pointer;text-align:center}
+.days button small{display:block;color:var(--muted);font-variant-numeric:tabular-nums;font-size:12px}
 .days button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .days button[aria-pressed="true"] small{color:inherit}
+.days button.today{box-shadow:inset 0 -3px 0 var(--accent)}
 .slider{display:flex;align-items:center;gap:12px;margin:4px 0 14px}
 .slider output{font-family:var(--display);font-weight:800;font-size:26px;min-width:84px;font-variant-numeric:tabular-nums}
 .slider input{flex:1;accent-color:var(--accent);height:28px}
 .now{margin:0 0 14px;font-weight:500}
 .now b{font-weight:700}
 .row{display:grid;grid-template-columns:112px 1fr;align-items:center;gap:8px;padding:5px 0;border-top:1px solid var(--line)}
-.row .nm{display:flex;align-items:center;font-weight:700;font-size:14px}
+.row .nm{display:flex;align-items:center;font-weight:700;font-size:14px;min-width:0}
 .row .nm .av{width:24px;height:24px;font-size:12px;margin-right:6px;flex:none}
 .row .nm .dot{width:8px;height:8px;border-radius:50%;background:var(--line);margin-left:6px;flex:none}
+.row .times{display:none;margin-left:auto;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
 .row.on .nm .dot{background:var(--good);box-shadow:0 0 0 3px color-mix(in srgb,var(--good) 25%,transparent)}
-.row.dim .nm{opacity:.55}
+.row.dim .nm .name{opacity:.55}
 .track{position:relative;height:34px;border-radius:8px;background:var(--off);
   background-image:repeating-linear-gradient(90deg,transparent 0,transparent calc(12.5% - 1px),var(--line) calc(12.5% - 1px),var(--line) 12.5%)}
 .track.wait{background:transparent;border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
@@ -89,6 +94,7 @@ tr.count td.who{text-align:left;font-weight:500}
 .hide{display:none}
 .mob{display:none}
 .dcard{border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:10px}
+.dcard.today{border-color:var(--accent)}
 .dcard .dh{display:flex;justify-content:space-between;align-items:baseline;width:100%;border:0;background:transparent;color:var(--ink);font:inherit;font-weight:800;font-size:16px;padding:2px 0 8px;cursor:pointer;text-align:left}
 .dcard .dh small{color:var(--accent);font-weight:700;font-size:13px}
 .dcard ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
@@ -103,9 +109,10 @@ tr.count td.who{text-align:left;font-weight:500}
   .row{grid-template-columns:1fr;gap:4px}
   .ticks{grid-template-columns:1fr}
   .ticks > div:first-child{display:none}
-  .row .nm{font-size:14px}
-  .seg-bar{font-size:10px}
+  .row .times{display:block}
+  .seg-bar{font-size:0}
   .slider output{font-size:22px;min-width:72px}
+  .weeklabel{min-width:100px}
 }
 @media (prefers-reduced-motion:no-preference){
   .cell,.seg button,.days button{transition:transform .12s, background .12s}
@@ -124,7 +131,11 @@ tr.count td.who{text-align:left;font-weight:500}
       <button id="v-semaine" aria-pressed="true">Semaine</button>
       <button id="v-jour" aria-pressed="false">Jour</button>
     </div>
-    <div class="weeklabel" id="weeklabel"></div>
+    <div class="nav">
+      <button id="prev" aria-label="Semaine précédente">&#8249;</button>
+      <div class="weeklabel" id="weeklabel" aria-live="polite"></div>
+      <button id="next" aria-label="Semaine suivante">&#8250;</button>
+    </div>
   </div>
 
   <section class="card" id="semaine"></section>
@@ -133,8 +144,10 @@ tr.count td.who{text-align:left;font-weight:500}
 </div>
 
 <script>
-/* ----- Données : par personne, 7 valeurs (lundi à dimanche). "" = repos, plusieurs créneaux séparés par "/".
-   Une personne sans entrée dans WEEK n'a pas encore envoyé son planning. ----- */
+/* ----- Données -----
+   Une entrée par semaine, clé = date du lundi (AAAA-MM-JJ).
+   Par personne : 7 valeurs (lundi à dimanche). "" = repos, plusieurs créneaux séparés par "/".
+   Une personne absente d'une semaine n'a pas encore envoyé son planning pour cette semaine. */
 var PEOPLE = [
   {name:'Sébastien', color:'#2f5bea'},
   {name:'Lilas',     color:'#e4572e'},
@@ -145,17 +158,30 @@ var PEOPLE = [
   {name:'Morgane',   color:'#c2255c'},
   {name:'Yves',      color:'#3b7d1e'}
 ];
-var BASE = new Date(2026, 10, 30); /* lundi 30 novembre 2026, semaine 49 */
-var WEEK = {
-  'Sébastien':['','8h00-14h00','8h00-14h00','8h00-14h00','8h00-11h45/12h30-18h15','','8h00-11h45/12h30-18h00'],
-  'Francois': ['11h00-17h00/17h45-20h00','','13h45-16h00/16h45-22h00','','','',''],
-  'Loisa':    ['','','','13h15-17h00/17h45-21h45','14h15-17h15/18h00-22h00','',''],
-  'Morgane':  ['','','','8h00-13h00/13h45-17h45','8h00-14h00','8h00-14h00','8h00-13h15'],
-  'Yves':     ['8h00-11h45/16h30-22h00','8h00-13h00/13h45-18h00','','8h00-12h30/17h15-22h00','','','8h00-11h45/16h30-22h00']
+PEOPLE.sort(function(a, b){ return a.name.localeCompare(b.name, 'fr'); }); /* ordre alphabétique */
+var DATA = {
+  '2026-11-30': {
+    'Sébastien':['','8h00-14h00','8h00-14h00','8h00-14h00','8h00-11h45/12h30-18h15','','8h00-11h45/12h30-18h00'],
+    'Francois': ['11h00-17h00/17h45-20h00','','13h45-16h00/16h45-22h00','','','',''],
+    'Loisa':    ['','','','13h15-17h00/17h45-21h45','14h15-17h15/18h00-22h00','',''],
+    'Morgane':  ['','','','8h00-13h00/13h45-17h45','8h00-14h00','8h00-14h00','8h00-13h15'],
+    'Yves':     ['8h00-11h45/16h30-22h00','8h00-13h00/13h45-18h00','','8h00-12h30/17h15-22h00','','','8h00-11h45/16h30-22h00']
+  }
 };
 var DAYN = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
 var DAYS_LONG = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
 var H0 = 6, H1 = 22;
+
+/* ----- Semaines ----- */
+var WK = Object.keys(DATA).sort().map(function(k){
+  var p = k.split('-');
+  return {key:k, start:new Date(+p[0], +p[1] - 1, +p[2]), data:DATA[k]};
+});
+function isoWeek(dt){
+  var d = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate()));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  return Math.ceil(((d - new Date(Date.UTC(d.getUTCFullYear(), 0, 1))) / 86400000 + 1) / 7);
+}
 
 /* ----- Outils ----- */
 function parse(s){
@@ -166,37 +192,47 @@ function fmt(t){
   var h = Math.floor(t + 1e-9), mn = Math.round((t - h) * 60);
   return h + 'h' + (mn < 10 ? '0' : '') + mn;
 }
-function dateOf(d){ return new Date(BASE.getFullYear(), BASE.getMonth(), BASE.getDate() + d); }
+function dateOf(d){ var s = WK[S.week].start; return new Date(s.getFullYear(), s.getMonth(), s.getDate() + d); }
 function short(dt){ return dt.getDate() + '/' + (dt.getMonth() + 1); }
 function longDate(dt){ return dt.toLocaleDateString('fr-FR', {day:'numeric', month:'long'}); }
-function known(p){ return !!WEEK[p.name]; }
-function raw(p, d){ return WEEK[p.name][d]; }
+function known(p){ return !!WK[S.week].data[p.name]; }
+function raw(p, d){ return WK[S.week].data[p.name][d]; }
 function segs(p, d){
   if(!known(p) || !raw(p, d)) return [];
   return raw(p, d).split('/').map(parse).filter(Boolean);
 }
 function av(p){ return '<span class="av" style="background:' + p.color + '">' + p.name.charAt(0) + '</span>'; }
+function lines(s){ return s.split('/').map(function(x){ return x.replace('-', ' - '); }).join('<br>'); }
 
 /* ----- État ----- */
 var now = new Date();
-var diff = Math.floor((new Date(now.getFullYear(), now.getMonth(), now.getDate()) - BASE) / 86400000);
-var inRange = diff >= 0 && diff < 7;
-var S = {
-  day: inRange ? diff : 0,
-  t: (inRange && now.getHours() >= H0 && now.getHours() < H1) ? Math.round((now.getHours() + now.getMinutes()/60) * 4) / 4 : 10,
-  view: 'semaine'
-};
-function isToday(d){ return inRange && d === diff; }
-
-var nKnown = PEOPLE.filter(known).length;
-document.getElementById('note').textContent = nKnown + ' plannings sur ' + PEOPLE.length + ' pour le moment. Les autres arrivent dès qu\'ils sont envoyés.';
-document.getElementById('weeklabel').innerHTML = 'Semaine 49<small>' + short(dateOf(0)) + ' au ' + short(dateOf(6)) + '</small>';
+var today0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+function weekIndexOf(dt){
+  for(var i = 0; i < WK.length; i++){
+    var diff = Math.round((dt - WK[i].start) / 86400000);
+    if(diff >= 0 && diff < 7) return i;
+  }
+  return -1;
+}
+var S = {week:0, day:0, t:10, view:'semaine'};
+(function(){
+  var i = weekIndexOf(today0);
+  if(i >= 0){
+    S.week = i;
+    S.day = Math.round((today0 - WK[i].start) / 86400000);
+    if(now.getHours() >= H0 && now.getHours() < H1) S.t = Math.round((now.getHours() + now.getMinutes()/60) * 4) / 4;
+  } else {
+    var next = WK.findIndex(function(w){ return w.start > today0; });
+    S.week = next >= 0 ? next : WK.length - 1;
+  }
+})();
+function isToday(d){ return dateOf(d).getTime() === today0.getTime(); }
 
 /* ----- Vue semaine ----- */
 function renderWeek(){
   var h = '<div class="scroll"><table><thead><tr><th></th>';
   for(var d = 0; d < 7; d++){
-    h += '<th>' + DAYN[d] + '<small>' + short(dateOf(d)) + '</small></th>';
+    h += '<th' + (isToday(d) ? ' class="today"' : '') + '>' + DAYN[d] + '<small>' + short(dateOf(d)) + '</small></th>';
   }
   h += '</tr></thead><tbody>';
   PEOPLE.forEach(function(p){
@@ -205,8 +241,7 @@ function renderWeek(){
       if(!known(p)){
         h += '<td><span class="cell wait">à venir</span></td>';
       } else if(raw(p, d)){
-        var lines = raw(p, d).split('/').map(function(x){ return x.replace('-', ' - '); }).join('<br>');
-        h += '<td><button class="cell" data-d="' + d + '" style="background:' + p.color + '" aria-label="' + p.name + ', ' + DAYN[d] + ' ' + raw(p, d).replace('/', ' puis ') + '">' + lines + '</button></td>';
+        h += '<td><button class="cell" data-d="' + d + '" style="background:' + p.color + '" aria-label="' + p.name + ', ' + DAYN[d] + ' ' + raw(p, d).replace('/', ' puis ') + '">' + lines(raw(p, d)) + '</button></td>';
       } else {
         h += '<td><span class="cell off">Repos</span></td>';
       }
@@ -215,10 +250,10 @@ function renderWeek(){
   });
   h += '<tr class="count"><td class="who">En poste</td>';
   for(var d2 = 0; d2 < 7; d2++){
-    var n = PEOPLE.filter(function(p){ return segs(p, d2).length; }).length;
-    h += '<td>' + n + '</td>';
+    h += '<td>' + PEOPLE.filter(function(p){ return segs(p, d2).length; }).length + '</td>';
   }
   h += '</tr></tbody></table></div>';
+
   var m = '';
   for(var d3 = 0; d3 < 7; d3++){
     var work = [], rest = [];
@@ -226,9 +261,9 @@ function renderWeek(){
       if(!known(p)) return;
       if(raw(p, d3)) work.push(p); else rest.push(p.name);
     });
-    m += '<div class="dcard"><button class="dh" data-d="' + d3 + '"><span>' + DAYS_LONG[d3] + ' ' + short(dateOf(d3)) + '</span><small>' + work.length + ' en poste &#8250;</small></button><ul>';
+    m += '<div class="dcard' + (isToday(d3) ? ' today' : '') + '"><button class="dh" data-d="' + d3 + '"><span>' + DAYS_LONG[d3] + ' ' + short(dateOf(d3)) + '</span><small>' + work.length + ' en poste &#8250;</small></button><ul>';
     work.forEach(function(p){
-      m += '<li style="border-left-color:' + p.color + '"><b>' + p.name + '</b><span>' + raw(p, d3).split('/').map(function(x){ return x.replace('-', ' - '); }).join('<br>') + '</span></li>';
+      m += '<li style="border-left-color:' + p.color + '"><b>' + p.name + '</b><span>' + lines(raw(p, d3)) + '</span></li>';
     });
     m += '</ul>' + (rest.length ? '<p class="rest">Repos : ' + rest.join(', ') + '</p>' : '') + '</div>';
   }
@@ -243,7 +278,7 @@ function renderWeek(){
 function renderDay(){
   var h = '<div class="days" role="group" aria-label="Jour">';
   for(var d = 0; d < 7; d++){
-    h += '<button data-d="' + d + '" aria-pressed="' + (d === S.day) + '">' + DAYN[d] + '<small>' + short(dateOf(d)) + '</small></button>';
+    h += '<button data-d="' + d + '" class="' + (isToday(d) ? 'today' : '') + '" aria-pressed="' + (d === S.day) + '">' + DAYN[d] + '<small>' + short(dateOf(d)) + '</small></button>';
   }
   h += '</div>';
   h += '<div class="slider"><output id="tval" for="tr"></output><input id="tr" type="range" min="' + H0 + '" max="' + H1 + '" step="0.25" value="' + S.t + '" aria-label="Heure de la journée"></div>';
@@ -252,13 +287,15 @@ function renderDay(){
   for(var x = H0; x <= H1; x += 2){ h += '<span style="left:' + ((x - H0)/(H1 - H0)*100) + '%">' + x + 'h</span>'; }
   h += '</div></div>';
   PEOPLE.forEach(function(p, i){
-    h += '<div class="row" data-i="' + i + '"><div class="nm">' + av(p) + p.name + '<span class="dot"></span></div>';
+    var ss = segs(p, S.day);
+    var times = !known(p) ? 'à venir' : (ss.length ? ss.map(function(s){ return fmt(s[0]) + '-' + fmt(s[1]); }).join(' · ') : 'Repos');
+    h += '<div class="row" data-i="' + i + '"><div class="nm">' + av(p) + '<span class="name">' + p.name + '</span><span class="dot"></span><span class="times">' + times + '</span></div>';
     if(!known(p)){
       h += '<div class="track wait">planning à venir</div></div>';
       return;
     }
     h += '<div class="track">';
-    segs(p, S.day).forEach(function(s){
+    ss.forEach(function(s){
       var l = (s[0] - H0)/(H1 - H0)*100, w = (s[1] - s[0])/(H1 - H0)*100;
       h += '<div class="seg-bar" style="left:' + l + '%;width:' + w + '%;background:' + p.color + '">' + fmt(s[0]) + ' - ' + fmt(s[1]) + '</div>';
     });
@@ -286,7 +323,7 @@ function updateTime(){
     if(active) on.push(p.name);
   });
   var label = DAYN[S.day] + ' ' + longDate(dateOf(S.day)) + ' à ' + fmt(S.t);
-  var tail = nKnown < PEOPLE.length ? ' (plannings reçus uniquement)' : '';
+  var tail = PEOPLE.filter(known).length < PEOPLE.length ? ' (plannings reçus uniquement)' : '';
   document.getElementById('now').innerHTML = on.length
     ? '<b>' + on.length + ' en poste</b> le ' + label + ' : ' + on.join(', ') + '.' + tail
     : '<b>Personne en poste</b> le ' + label + '.' + tail;
@@ -301,13 +338,25 @@ function setView(v){
   document.getElementById('jour').classList.toggle('hide', v !== 'jour');
   if(v === 'jour') renderDay(); else renderWeek();
 }
+function refresh(){
+  var a = dateOf(0), b = dateOf(6);
+  document.getElementById('weeklabel').innerHTML = 'Semaine ' + isoWeek(a) + '<small>' + short(a) + ' au ' + short(b) + '</small>';
+  document.getElementById('prev').disabled = S.week === 0;
+  document.getElementById('next').disabled = S.week === WK.length - 1;
+  var n = PEOPLE.filter(known).length, note = document.getElementById('note');
+  note.classList.toggle('hide', n === PEOPLE.length);
+  note.textContent = n + ' plannings sur ' + PEOPLE.length + ' pour cette semaine. Les autres arrivent dès qu\'ils sont envoyés.';
+  setView(S.view);
+}
+document.getElementById('prev').addEventListener('click', function(){ if(S.week > 0){ S.week--; refresh(); } });
+document.getElementById('next').addEventListener('click', function(){ if(S.week < WK.length - 1){ S.week++; refresh(); } });
 document.getElementById('v-semaine').addEventListener('click', function(){ setView('semaine'); });
 document.getElementById('v-jour').addEventListener('click', function(){ setView('jour'); });
 
 document.getElementById('legend').innerHTML = PEOPLE.map(function(p){
   return '<span><i style="background:' + p.color + '"></i>' + p.name + '</span>';
 }).join('');
-setView('semaine');
+refresh();
 </script>
 </body>
 </html>
